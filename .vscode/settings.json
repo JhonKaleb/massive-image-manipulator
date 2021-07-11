@@ -1,0 +1,14 @@
+{
+    "workbench.colorCustomizations": {
+        "statusBar.background" : "#1f1f1f",
+        "statusBar.noFolderBackground" : "#1b1b1b",
+        "statusBar.debuggingBackground": "#263238"
+    },
+    "powermode.comboTimeout": 5,
+    "powermode.enabled": true,
+    "powermode.enableStatusBarComboCounter": true,
+    "powermode.enableStatusBarComboTimer": true,
+    "powermode.enableShake": false,
+    "powermode.shakeIntensity": 0,
+    "powermode.comboThreshold": 75,
+}
