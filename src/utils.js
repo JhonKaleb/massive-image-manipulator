@@ -1,8 +1,6 @@
 const fs = require('fs');
 
-const thumbnailWidth = 1280;
-const thumbnailHeight = 720;
-
+// TODO criar um log para os erros que entrarem aqui, para detalhamento
 function errorCallback(err){
     return console.error(err);
 }
@@ -21,7 +19,6 @@ function createsThumbnailsFolder(newFolderPath){
 
     fs.mkdir(`${newFolderPath}/Thumbnails`, errorCallback);
     console.log(`Created Thumbnails directory in ${newFolderPath}`);
-    return `${newFolderPath}/Thumbnails`
 }
 
 
@@ -29,6 +26,4 @@ module.exports = {
     filterImageFiles,
     createsThumbnailsFolder,
     errorCallback,
-    thumbnailWidth,
-    thumbnailHeight
 }
