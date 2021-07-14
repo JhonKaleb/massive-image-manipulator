@@ -16,6 +16,7 @@ class ImageManipulator{
         this.imageName = imageName
         this.sharp = sharp(`${this.imagesFolderPath}/${this.imageName}`);
         if (this.resize) this.resizeImage();
+        if (this.newFileExtension) this.changefileExtension();
         this.saveFile();
     }
 
@@ -29,6 +30,10 @@ class ImageManipulator{
         } catch (error) {
             console.log(`Could not resize the image ${this.imageName}. Try to use a diferent size.`);
         }
+    }
+
+    changefileExtension() {
+        this.imageName = utils.fileNameWithoutExtension(this.imageName) + this.newFileExtension;
     }
 }
 

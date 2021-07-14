@@ -4,7 +4,7 @@ const utils = require('./utils')
 
 const options = {
     resize: true,
-    newFileExtension: 'png',
+    newFileExtension: '',
     newSize: {
         widthPx: 1280,
         heightPx: 720
@@ -13,7 +13,7 @@ const options = {
 }
 
 const imageFilesList = fs.readdirSync(options.imagesFolderPath).filter(utils.filterImageFiles);
-utils.createsThumbnailsFolder(options.imagesFolderPath)
+utils.createsThumbnailsFolder(options.imagesFolderPath);
 
 imageManipulator = new ImageManipulator(options)
 imageFilesList.forEach(image => {
