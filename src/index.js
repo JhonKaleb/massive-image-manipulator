@@ -12,10 +12,22 @@ const options = {
     imagesFolderPath: 'C:/Users/JhonK/Pictures/testes'
 }
 
-const imageFilesList = fs.readdirSync(options.imagesFolderPath).filter(utils.filterImageFiles);
 utils.createsThumbnailsFolder(options.imagesFolderPath);
+const imageList = utils.getAllFolderImages(options.imagesFolderPath);
 
-imageManipulator = new ImageManipulator(options)
-imageFilesList.forEach(image => {
-    imageManipulator.manipulate(image);
+async function manipulateImage(){
+    imageManipulator = new ImageManipulator(options)
+    console.info('Transforming images...');
+    const imagePromisseList = []
+
+    imageList.forEach(image => {
+        imagePromisseList.push(imageManipulator.manipulate(image));
+    });
+
+    console.log(`Saving images in ${options.imagesFolderPath}/Thumbnails...`);
+    return Promise.all(imagePromisseList)
+}
+
+manipulateImage().then(() => {
+    console.info('Process finished!');
 });

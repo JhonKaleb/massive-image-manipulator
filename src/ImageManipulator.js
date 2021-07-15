@@ -17,11 +17,11 @@ class ImageManipulator{
         this.sharp = sharp(`${this.imagesFolderPath}/${this.imageName}`);
         if (this.resize) this.resizeImage();
         if (this.newFileExtension) this.changefileExtension();
-        this.saveFile();
+        return this.saveFile();
     }
 
     saveFile() {
-        this.sharp.toFile(`${this.imagesFolderPath}/Thumbnails/${this.imageName}`);
+        return this.sharp.toFile(`${this.imagesFolderPath}/Thumbnails/${this.imageName}`);
     }
 
     resizeImage() {

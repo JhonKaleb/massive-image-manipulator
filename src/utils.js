@@ -1,7 +1,6 @@
 const fs = require('fs');
 const imageNamePosition = 0;
 
-// TODO criar um log para os erros que entrarem aqui, para detalhamento
 function errorCallback(err){
     return console.error(err);
 }
@@ -16,21 +15,29 @@ function fileNameWithoutExtension(fileName){
     return fileName.split(imgRegex)[imageNamePosition];
 }
 
-function thumbnailsDirectoryExist(directoryToSearch){
-    return fs.existsSync(`${directoryToSearch}/Thumbnails`);
+function directoryExist(directoryToSearch){
+    return fs.existsSync(`${directoryToSearch}`);
+}
+
+function getAllFolderImages(imagesFolderPath){
+    return fs.readdirSync(imagesFolderPath).filter(filterImageFiles);
 }
 
 function createsThumbnailsFolder(newFolderPath){
-    if (thumbnailsDirectoryExist(newFolderPath)) return `${newFolderPath}/Thumbnails`;
-
-    fs.mkdir(`${newFolderPath}/Thumbnails`, errorCallback);
-    console.log(`Created Thumbnails directory in ${newFolderPath}`);
+    try {
+        if (directoryExist(`${newFolderPath}/Thumbnails`)) return `${newFolderPath}/Thumbnails`;
+        if (!directoryExist(newFolderPath)) throw 'The specified image directory does not exist.'
+        fs.mkdir(`${newFolderPath}/Thumbnails`, errorCallback);
+        console.log(`Created Thumbnails directory in ${newFolderPath}`);
+    } catch (error) {
+        console.error(error);
+    }
 }
-
 
 module.exports = {
     filterImageFiles,
     createsThumbnailsFolder,
     errorCallback,
-    fileNameWithoutExtension
+    fileNameWithoutExtension,
+    getAllFolderImages
 }
