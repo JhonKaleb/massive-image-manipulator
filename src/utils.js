@@ -1,4 +1,5 @@
 const fs = require('fs');
+const yargs = require('yargs');
 const imageNamePosition = 0;
 
 function errorCallback(err){
@@ -23,7 +24,7 @@ function directoryExist(directoryToSearch){
  * Gets all images from an folder.
  * Suported files extensions are jpg, png, webp, gif and tiff.
  *
- * @param  {String} imagesFolderPath Directory to get images from
+ * @param  {String} imagesFolderPath Directory to get images from.
  * @return {List} List of the names of all images found in the directory.
  */
 function getAllFolderImages(imagesFolderPath){
@@ -35,22 +36,65 @@ function getAllFolderImages(imagesFolderPath){
  * @param  {String} newFolderPath Directory path to create the new folder inside.
  */
 function createsThumbnailsFolder(newFolderPath){
-    try {
-        if (directoryExist(`${newFolderPath}/Thumbnails`)) return `${newFolderPath}/Thumbnails`;
-        if (!directoryExist(newFolderPath)) throw 'The specified image directory does not exist.'
-        fs.mkdir(`${newFolderPath}/Thumbnails`, errorCallback);
-        console.log(`Created Thumbnails directory in ${newFolderPath}`);
-    } catch (error) {
-        console.error(error);
-    }
+    if (directoryExist(`${newFolderPath}/Thumbnails`)) return `${newFolderPath}/Thumbnails`;
+    if (!directoryExist(newFolderPath))
+        throw 'The images-folder-path was not provided or the directory does not exist.'
+    fs.mkdir(`${newFolderPath}/Thumbnails`, errorCallback);
+    console.log(`Created Thumbnails directory in ${newFolderPath}`);
 }
 
-console.log(__dirname);
+yargs.version('1.0.0');
+yargs.command({
+    command: 'run',
+    describe: 'Runs the image manipulate script with arguments',
+    builder: {
+        'images-folder-path': {
+            describe: 'Path of directory with the images to be manipulated',
+            demandOption: true,
+            type: 'string'
+        },
+        'resize': {
+            describe: 'Use --resize if you want to set an new height and width',
+            type: 'boolean'
+        },
+        'width': {
+            describe: 'Define a new width from every image',
+            type: 'number'
+        },
+        'height': {
+            describe: 'Define a new height from every image',
+            type: 'number'
+        },
+        'file-extension': {
+            describe: 'Define a new file-extension from every image',
+            type: 'string',
+            choices: ['jpg', 'jpeg', 'png', 'webp', 'gif', 'tiff']
+        },
+    }
+});
+
+/**
+ * Uses Yargs module to parse the paramethers passed by the terminal by the user.
+ *
+ * @returns  {Object} Parameters to base image manipulation.
+ */
+function getTerminalArguments() {
+    return {
+        resize: yargs.argv['resize'],
+        newFileExtension: yargs.argv['file-extension'],
+        newSize: {
+            widthPx: yargs.argv['width'],
+            heightPx: yargs.argv['height']
+        },
+        imagesFolderPath: yargs.argv['images-folder-path']
+    };
+}
 
 module.exports = {
     isImageFiles,
     createsThumbnailsFolder,
     errorCallback,
     fileNameWithoutExtension,
-    getAllFolderImages
+    getAllFolderImages,
+    getTerminalArguments
 }

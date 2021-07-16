@@ -38,15 +38,20 @@ class ImageManipulator{
     }
 
     resizeImage() {
-        try {
-            this.sharp.resize(this.newSize.widthPx, this.newSize.heightPx)
-        } catch (error) {
-            console.log(`Could not resize the image ${this.imageName}. Try to use a diferent size.`);
-        }
+        if(!this.newSize.widthPx || !this.newSize.heightPx)
+            throw 'You forgot to provide the sizes, please provide a valid height and width';
+        this.sharp.resize(this.newSize.widthPx, this.newSize.heightPx);
     }
 
     changefileExtension() {
-        this.imageName = utils.fileNameWithoutExtension(this.imageName) + this.newFileExtension;
+        if (!this.isValidImgExtension(this.newFileExtension))
+            throw 'The file extension provided is not valid';
+        this.imageName = `${utils.fileNameWithoutExtension(this.imageName)}.${this.newFileExtension}`;
+    }
+
+    isValidImgExtension(extension) {
+        const imgExtensionsRegex = /(jpe?g|png|webp|gif|tiff)$/;
+        return imgExtensionsRegex.test(extension);
     }
 }
 
