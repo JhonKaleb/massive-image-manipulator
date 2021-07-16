@@ -1,16 +1,21 @@
 const fs = require('fs');
+const yargs = require('yargs');
 const ImageManipulator = require('./src/ImageManipulator');
-const utils = require('./src/utils');
+const {
+    getTerminalArguments,
+    createsThumbnailsFolder,
+    getAllFolderImages
+} = require('./src/utils');
 
 /** @const {Object} options parameters passed by the terminal by the user */
-const options = utils.getTerminalArguments();
+const options = getTerminalArguments(yargs);
 
 /**
  * Manipule and trasforme an list of images using the user givem options
  */
 async function manipulateImage(){
-    utils.createsThumbnailsFolder(options.imagesFolderPath);
-    const imageList = utils.getAllFolderImages(options.imagesFolderPath);
+    createsThumbnailsFolder(options.imagesFolderPath);
+    const imageList = getAllFolderImages(options.imagesFolderPath);
 
     imageManipulator = new ImageManipulator(options);
     console.log('Transforming images...');

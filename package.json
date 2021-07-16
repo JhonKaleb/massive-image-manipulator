@@ -2,12 +2,13 @@
   "name": "my_package",
   "description": "A software written in Node.js that manipulates and creates thumbnails from another image, based on parameters provided by the user.",
   "version": "1.0.0",
+  "main": "app.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/JhonKaleb/massive-image-manipulator.git"
   },
   "keywords": ["Images", "Thumbnails", "Massive data manipulation", "Image Editing"],
-  "author": "Jhon Kaleb Nogueira Costa",
+  "author": "Jhon Kaleb <jhon.kaleb@hotmail.com>",
   "license": "",
   "bugs": {
     "url": "https://github.com/JhonKaleb/massive-image-manipulator/issues"

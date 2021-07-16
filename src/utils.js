@@ -36,7 +36,7 @@ function getAllFolderImages(imagesFolderPath){
  * @param  {String} newFolderPath Directory path to create the new folder inside.
  */
 function createsThumbnailsFolder(newFolderPath){
-    if (directoryExist(`${newFolderPath}/Thumbnails`)) return `${newFolderPath}/Thumbnails`;
+    if (directoryExist(`${newFolderPath}/Thumbnails`)) return 'Already created';
     if (!directoryExist(newFolderPath))
         throw 'The images-folder-path was not provided or the directory does not exist.'
     fs.mkdir(`${newFolderPath}/Thumbnails`, errorCallback);
@@ -78,7 +78,25 @@ yargs.command({
  *
  * @returns  {Object} Parameters to base image manipulation.
  */
-function getTerminalArguments() {
+// function getTerminalArguments() {
+//     return {
+//         resize: yargs.argv['resize'],
+//         newFileExtension: yargs.argv['file-extension'],
+//         newSize: {
+//             widthPx: yargs.argv['width'],
+//             heightPx: yargs.argv['height']
+//         },
+//         imagesFolderPath: yargs.argv['images-folder-path']
+//     };
+// }
+
+/**
+ * Uses Yargs module to parse the paramethers passed by the terminal by the user.
+ *
+ * @param  {Object} yargs Paramethers passsed by user and parsed by yargs library
+ * @returns  {Object} Parameters to base image manipulation.
+ */
+function getTerminalArguments(yargs) {
     return {
         resize: yargs.argv['resize'],
         newFileExtension: yargs.argv['file-extension'],
@@ -96,5 +114,5 @@ module.exports = {
     errorCallback,
     fileNameWithoutExtension,
     getAllFolderImages,
-    getTerminalArguments
+    getTerminalArguments,
 }

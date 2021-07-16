@@ -1,1 +1,0 @@
-//const { generateText } = require('../src/index')
