@@ -79,7 +79,7 @@ test('Should throw that the directory does not exist', () => {
     }
 })
 
-test('Should output and object with the options provided in yargs', () => {
+test('Should output an object with the options provided in yargs', () => {
     const yargs = {
         argv: {
             resize: true,
@@ -89,7 +89,7 @@ test('Should output and object with the options provided in yargs', () => {
             'images-folder-path': __dirname
         }
     }
-    let ImagesList = getTerminalArguments(yargs)
+    let argsObject = getTerminalArguments(yargs)
     objectExpeted = {
         resize: true,
         newFileExtension: 'jpg',
@@ -99,5 +99,5 @@ test('Should output and object with the options provided in yargs', () => {
         },
         imagesFolderPath: __dirname
     };
-    expect(ImagesList).toEqual(objectExpeted)
+    expect(argsObject).toEqual(objectExpeted)
 })

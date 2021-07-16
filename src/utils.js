@@ -3,7 +3,8 @@ const yargs = require('yargs');
 const imageNamePosition = 0;
 
 function errorCallback(err){
-    return console.error(err);
+    if (err)
+        return console.error(err);
 }
 
 function isImageFiles(fileName){
@@ -72,23 +73,6 @@ yargs.command({
         },
     }
 });
-
-/**
- * Uses Yargs module to parse the paramethers passed by the terminal by the user.
- *
- * @returns  {Object} Parameters to base image manipulation.
- */
-// function getTerminalArguments() {
-//     return {
-//         resize: yargs.argv['resize'],
-//         newFileExtension: yargs.argv['file-extension'],
-//         newSize: {
-//             widthPx: yargs.argv['width'],
-//             heightPx: yargs.argv['height']
-//         },
-//         imagesFolderPath: yargs.argv['images-folder-path']
-//     };
-// }
 
 /**
  * Uses Yargs module to parse the paramethers passed by the terminal by the user.
