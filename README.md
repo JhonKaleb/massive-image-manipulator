@@ -35,6 +35,8 @@ $ npm install
 ```
 
 ### Usage exemple
+
+
 #### Resize an large number of images in an directory at once:
 Below is an example of how to use the script to create new resized images from an folder with images.
 
@@ -50,6 +52,8 @@ node app.js run app --images-folder-path="<Directory path where your images are 
 
 The script will create a new folder called Thumbnails inside the folder that you provide, with the images resized. Using the example above, would create the folder in C:/Users/user1/Pictures/, so C:/Users/user1/Pictures/Thumbnails.
 
+
+
 #### Setting an new extension to a large number of images at once:
 Exemple of to how convert all images inside an folder to a new extension.
 
@@ -62,6 +66,8 @@ node app.js run app --images-folder-path="<Directory path where your images are 
 ```
 
 The script will create a new folder called Thumbnails inside the folder that you provide, with the images converted. Using the example above, would create the folder in C:/Users/user1/Pictures/, so C:/Users/user1/Pictures/Thumbnails.
+
+
 
 #### Setting an size and a new extension to a large number of images at once:
 To set a new size and an format the images to another file extension in only one command, uses the exemple below.
@@ -77,8 +83,6 @@ node app.js run app --images-folder-path="<Directory path where your images are 
 ```
 
 The script will create a new folder called Thumbnails inside the folder that you provide, with the images formated an resized. Using the example above, would create the folder in C:/Users/user1/Pictures/, so C:/Users/user1/Pictures/Thumbnails.
-
-```
 
 ## Emailware
 
