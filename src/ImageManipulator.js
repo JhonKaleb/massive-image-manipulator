@@ -1,8 +1,14 @@
+/**
+ * Manipulates an image with options provided.
+ * @module ImageManipulator
+ */
 const sharp = require('sharp');
 const utils = require('./utils')
 
 class ImageManipulator{
-
+    /**
+     * @param  {Object} options Characteristics of the new image.
+     */
     constructor(options) {
         this.resize = options.resize,
         this.newSize = options.newSize,
@@ -12,6 +18,13 @@ class ImageManipulator{
         this.sharp = {}
     }
 
+    /**
+     * Create a new image from another, with the options provided to the class.
+     * The method saves the new image in a folder called Thumbnails, inside the diretory
+     * imagesFolderPath provided in the options.
+     *
+     * @param  {String} imageName Image that will be copied.
+     */
     manipulate(imageName){
         this.imageName = imageName
         this.sharp = sharp(`${this.imagesFolderPath}/${this.imageName}`);
